@@ -4,7 +4,7 @@
 // ✅ What We Did: Full Summary
 // ----------------------------
 
-// 🎯 Objective: Build a scalable RESTful API using ASP.NET Core to manage Products with:
+//  Objective: Build a scalable RESTful API using ASP.NET Core to manage Products with:
 // - Unique 6-digit Product Numbers (generated server-side)
 // - Stock increment/decrement operations
 // - Entity Framework Core (Code-First)
