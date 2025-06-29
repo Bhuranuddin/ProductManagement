@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProductManagementProject.Data;
 using ProductManagementProject.Utils;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add global exception handler middleware
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+
+        var result = JsonSerializer.Serialize(new
+        {
+            status = 500,
+            message = "An unexpected error occurred. Please try again later."
+        });
+
+        await context.Response.WriteAsync(result);
+    });
+});
 
 app.UseHttpsRedirection();
 

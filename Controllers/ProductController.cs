@@ -35,25 +35,24 @@ namespace ProductManagementProject.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct(ProductCreateDto dto)
         {
-            var product = new Product
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-                Price = dto.Price,
-                StockAvailable = dto.StockAvailable,
-                ProductNumber = await _idGenerator.GenerateUniqueProductNumberAsync()
-            };
+                var product = new Product
+                {
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    Price = dto.Price,
+                    StockAvailable = dto.StockAvailable,
+                    ProductNumber = await _idGenerator.GenerateUniqueProductNumberAsync()
+                };
 
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+            
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, Product updatedProduct)
+        public async Task<IActionResult> UpdateProduct(int id, ProductUpdateDto updatedProduct)
         {
-            if (id != updatedProduct.Id) return BadRequest();
-
             var product = await _context.Products.FindAsync(id);
             if (product == null) return NotFound();
 
