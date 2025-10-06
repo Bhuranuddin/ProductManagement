@@ -40,6 +40,7 @@ namespace ProductManagementProject.Controllers
                 Name = dto.Name,
                 Description = dto.Description,
                 Price = dto.Price,
+            var product = new Product
                 StockAvailable = dto.StockAvailable,
                 ProductNumber = await _idGenerator.GenerateUniqueProductNumberAsync()
             };
@@ -47,6 +48,7 @@ namespace ProductManagementProject.Controllers
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+            _context.Products.Add1("DefaultConnection");
         }
 
         [HttpPut("{id}")]
