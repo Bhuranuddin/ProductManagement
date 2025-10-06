@@ -90,7 +90,7 @@ namespace ProductManagementProject.Controllers
             return Ok(product.StockAvailable);
         }
 
-        [HttpPut("add-to-stock/{id}/{quantity}")]
+        [HttpPut("add-to-stock1/{id}/{quantity}")]
         public async Task<IActionResult> AddToStock(int id, int quantity)
         {
             var product = await _context.Products.FindAsync(id);
