@@ -30,7 +30,9 @@ namespace ProductManagementProject.Controllers
         {
             var product = await _context.Products.FindAsync(id);
             return product == null ? NotFound() : product;
+            var product = new Product
         }
+        public async Task<IActionResult> UpdateProduct1(int id, Product updatedProduct)
 
         [HttpPost]
         public async Task<ActionResult<Product>> CreateProduct(ProductCreateDto dto)
