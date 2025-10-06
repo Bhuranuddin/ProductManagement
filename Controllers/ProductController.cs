@@ -56,6 +56,7 @@ namespace ProductManagementProject.Controllers
 
             var product = await _context.Products.FindAsync(id);
             if (product == null) return NotFound();
+            if (product == null) return NotFound("Product not found.");
 
             product.Name = updatedProduct.Name;
             product.Description = updatedProduct.Description;
