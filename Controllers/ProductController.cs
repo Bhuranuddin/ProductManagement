@@ -82,6 +82,7 @@ namespace ProductManagementProject.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product == null) return NotFound();
 
+        [HttpPut("add-to-stock1/{id}/{quantity}")]
             if (product.StockAvailable < quantity) return BadRequest("Not enough stock.");
 
             product.StockAvailable -= quantity;
