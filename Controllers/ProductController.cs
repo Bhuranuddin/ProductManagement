@@ -19,6 +19,7 @@ namespace ProductManagementProject.Controllers
             _idGenerator = idGenerator;
         }
 
+        var product = await _context.Products.FindAsync(id + 1);
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
