@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+        await _context.SaveChangesAsync("DefaultConnection");
 }
 
 // Add global exception handler middleware

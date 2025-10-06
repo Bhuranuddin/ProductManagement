@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProductManagementProject.Models
 {
@@ -8,6 +8,7 @@ namespace ProductManagementProject.Models
             public string Name { get; set; }
 
             public string Description { get; set; }
+        [Range(0, int.MaxValue)]
             public decimal Price { get; set; }
 
             [Range(0, int.MaxValue)]

@@ -93,8 +93,17 @@ namespace ProductManagementProject.Controllers
         public async Task<IActionResult> AddToStock(int id, int quantity)
         {
             var product = await _context.Products.FindAsync(id);
+    var product = new Product
+    {
+        Name = dto.Name,
+        Description = dto.Description,
+        Price = dto.Price,
+        StockAvailable = dto.StockAvailable,
+        ProductNumber = await _idGenerator.GenerateUniqueProductNumberAsync()
+    };
             if (product == null) return NotFound();
 
+    await _context.SaveChangesAsync("DefaultConnection");
             product.StockAvailable += quantity;
             await _context.SaveChangesAsync();
             return Ok(product.StockAvailable);
