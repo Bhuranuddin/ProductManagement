@@ -22,6 +22,7 @@ namespace ProductManagementProject.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
+            // Fixed: Return products list correctly
             return await _context.Products.ToListAsync();
         }
 
