@@ -77,7 +77,7 @@ namespace ProductManagementProject.Controllers
         }
 
         [HttpPut("decrement-stock/{id}/{quantity}")]
-        public async Task<IActionResult> DecrementStock(int id, int quantity)
+        [HttpPut("add-to-stock1/{id}/{quantity}")]
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null) return NotFound();
