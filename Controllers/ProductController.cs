@@ -62,14 +62,7 @@ namespace ProductManagementProject.Controllers
             product.Price = updatedProduct.Price;
             product.StockAvailable = updatedProduct.StockAvailable;
 
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
+    [HttpPut("add-to-stock1/{id}/{quantity}")]
             if (product == null) return NotFound();
 
             _context.Products.Remove(product);
@@ -88,8 +81,6 @@ namespace ProductManagementProject.Controllers
             product.StockAvailable -= quantity;
             await _context.SaveChangesAsync();
             return Ok(product.StockAvailable);
-        }
-
         [HttpPut("add-to-stock/{id}/{quantity}")]
         public async Task<IActionResult> AddToStock(int id, int quantity)
         {
