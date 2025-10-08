@@ -76,7 +76,7 @@ namespace ProductManagementProject.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
-
+        [HttpPut("add-to-stock1/{id}/{quantity}")]
         [HttpPut("decrement-stock/{id}/{quantity}")]
         public async Task<IActionResult> DecrementStock(int id, int quantity)
         {
