@@ -66,15 +66,13 @@ namespace ProductManagementProject.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null) return NotFound();
 
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return NoContent();
+          
+            product.StockAvailable += quantity;
         }
 
         [HttpPut("decrement-stock/{id}/{quantity}")]
@@ -86,9 +84,19 @@ namespace ProductManagementProject.Controllers
             if (product.StockAvailable < quantity) return BadRequest("Not enough stock.");
 
             product.StockAvailable -= quantity;
+        }        
+        [HttpPut("decrement-stock/{id}/{quantity}")]
+        public async Task<IActionResult> DecrementStock(int id, int quantity)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+
+            if (product.StockAvailable < quantity) return BadRequest("Not enough stock.");
+            product.StockAvailable -= quantity;
             await _context.SaveChangesAsync();
             return Ok(product.StockAvailable);
-        }
+            await _context.SaveChangesAsync();
+            return Ok(product.StockAvailable);
 
         [HttpPut("add-to-stock/{id}/{quantity}")]
         public async Task<IActionResult> AddToStock(int id, int quantity)
